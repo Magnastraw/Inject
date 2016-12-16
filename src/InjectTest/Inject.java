@@ -6,6 +6,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
 
+// Добавить для дженериков
 public class Inject {
     private Properties property;
     private FileInputStream fileStream;
