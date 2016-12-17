@@ -21,14 +21,14 @@ interface SomeOtherInterface{
     public void doSomething();
 }
 
-class OtherImpl implements SomeOtherInterface{
+class SomeImpl implements SomeInterface {
 
     public void doSomething(){
         System.out.println("A");
     }
 }
 
-class SomeImpl implements SomeInterface {
+class OtherImpl implements SomeInterface{
 
     public void doSomething(){
         System.out.println("B");

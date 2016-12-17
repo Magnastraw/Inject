@@ -4,16 +4,17 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Objects;
 import java.util.Properties;
 
-// Добавить для дженериков
-public class Inject {
+
+public class Inject<T> {
     private Properties property;
     private FileInputStream fileStream;
     private Class c;
     Field[] fields;
 
-    public Object inject(Object o) throws IOException, IllegalAccessException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException {
+    public T inject(T o) throws IOException, IllegalAccessException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException {
         property = new Properties();
         fileStream = new FileInputStream("src/config.properties");
         property.load(fileStream);
@@ -22,7 +23,7 @@ public class Inject {
         for (Field field : fields) {
             if (field.isAnnotationPresent(AutoInjectable.class)) {
                 String className = property.getProperty(field.getType().getCanonicalName());
-                Class setToClass = Class.forName(className);
+                Class setToClass =  Class.forName(className);
                 Object object = setToClass.newInstance();
                 field.set(o, object);
             }
